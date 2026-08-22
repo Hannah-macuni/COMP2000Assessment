@@ -1,0 +1,13 @@
+public class Wind extends Weather{
+
+	public int direction;
+
+	public Wind(int strength, int duration, int[][] location, int direction){
+		super(strength, duration, location);
+		this.direction = direction;
+	}
+
+	public int getDirection(){
+		return direction;
+	}
+}
