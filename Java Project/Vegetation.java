@@ -1,14 +1,16 @@
-public abstract class Vegetation {
+public abstract class Vegetation implements Burnable{
     private int age;
     private int fuel;
     private int burnRate;
     private double moisture;
+    private boolean burning;
 
     public Vegetation(int age, int fuel, int burnRate, double moisture){
         this.age = age;
         this.fuel = fuel;
         this.burnRate = burnRate;
         this.moisture = moisture;
+        this.burning = false;
     }
 
     public int getAge(){
@@ -26,4 +28,42 @@ public abstract class Vegetation {
     public double getMoisture(){
         return moisture;
     }
+
+    public void setMoisture(double moisture){
+        this.moisture = moisture;
+    }
+
+    @Override
+    public boolean isBurning(){
+        return burning;
+    }
+
+    @Override
+    public void ignite(){
+        if (!isBurnedOut()) {
+            burning = true;
+        }
+    }
+
+    @Override
+    public void burn (int intensity){
+        if(!burning){
+            return;
+        }
+
+        int fuelLoss = (int)(intensity * burnRate * (1 - moisture)); //how much fuel is lost after a burn
+        fuel = Math.max(0, fuel - fuelLoss); //remove fuel after its gone
+
+        if(isBurnedOut()){
+            burning = false;
+        }
+    }
+
+    @Override
+    public boolean isBurnedOut() {
+        return fuel <= 0;
+    }
+
+    public abstract double calculateSpreadHeat(int fireIntensity);
+    public abstract void update();
 }
