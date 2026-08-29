@@ -1,4 +1,4 @@
-public abstract class Vegetation implements Burnable{
+public abstract class Vegetation extends Terrain implements Burnable{
     private int age;
     private int fuel;
     private int burnRate;
