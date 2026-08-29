@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 public class Grid<T> {
     ArrayList<ArrayList<T>> grid;
     int dx;
@@ -36,5 +37,37 @@ public class Grid<T> {
             ArrayList<T> reference = grid.get(i);
             reference = new ArrayList<T>(dy);
         }
+    }
+
+    public T getCell(int row, int column){
+        return grid.get(row).get(column);
+    }
+
+    public void setCell(int row, int column, T element){
+        grid.get(row).set(column, element);
+    }
+
+    public void fill(T element){
+        for (ArrayList<T> arrayList : grid) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                arrayList.set(i, element);
+            }
+        }
+    }
+
+    public boolean isInBounds(int row, int column){
+        if (grid.size() > row + 1) {
+            return false;
+        } else if(grid.get(row).size() > column + 1){
+            return false;
+        }
+        return true;
+    }
+
+    public List<T> neighbors(int row, int column){
+        if(!isInBounds(row, column)) return null;
+        ArrayList<T> list = new ArrayList<>();
+        if(true);
+        return list;
     }
 }
