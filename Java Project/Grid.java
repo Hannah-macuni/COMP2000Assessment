@@ -44,8 +44,16 @@ public class Grid<T> {
         return grid.get(row).get(column);
     }
 
+    public T getCell(Coordinate c){
+        return getCell(c.x, c.y);
+    }
+
     public void setCell(int row, int column, T element) {
         grid.get(row).set(column, element);
+    }
+
+    public void setCell(Coordinate c, T element) {
+        setCell(c.x, c.y, element);
     }
 
     public void fill(T element) {
@@ -63,6 +71,10 @@ public class Grid<T> {
             return false;
         }
         return true;
+    }
+
+    public boolean isInBounds(Coordinate c) {
+        return isInBounds(c.x, c.y);
     }
 
     public List<T> neighbors(int row, int column) {
@@ -87,5 +99,37 @@ public class Grid<T> {
         if (!isInBounds(row + 1, column + 1))
             list.add(getCell(row + 1, column + 1));
         return list;
+    }
+
+    public List<T> neighbors(Coordinate c){
+        return neighbors(c.x, c.y);
+    }
+
+    public List<Coordinate> neighborLocations(int row, int column){
+        if(!isInBounds(row, column)){
+            return null;
+        }
+        ArrayList<Coordinate> list = new ArrayList<>();
+        if (!isInBounds(row - 1, column - 1))
+            list.add(new Coordinate(row - 1, column - 1));
+        if (!isInBounds(row - 1, column))
+            list.add(new Coordinate(row - 1, column));
+        if (!isInBounds(row - 1, column + 1))
+            list.add(new Coordinate(row - 1, column + 1));
+        if (!isInBounds(row, column - 1))
+            list.add(new Coordinate(row, column - 1));
+        if (!isInBounds(row, column + 1))
+            list.add(new Coordinate(row, column + 1));
+        if (!isInBounds(row + 1, column - 1))
+            list.add(new Coordinate(row + 1, column - 1));
+        if (!isInBounds(row + 1, column))
+            list.add(new Coordinate(row + 1, column));
+        if (!isInBounds(row + 1, column + 1))
+            list.add(new Coordinate(row + 1, column + 1));
+        return list;
+    }
+
+    public List<Coordinate> neighborLocations(Coordinate c){
+        return neighborLocations(c.x, c.y);
     }
 }
