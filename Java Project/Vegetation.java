@@ -39,17 +39,15 @@ public abstract class Vegetation extends Terrain implements Burnable{
     }
 
     @Override
-    public void ignite(){
-        if (!isBurnedOut()) {
-            burning = true;
-        }
-    }
-
-    @Override
     public void burn (int intensity){
         if(!burning){
             return;
         }
+
+        // needs further discussion for use of exception
+        // if(intensity<0){
+        //     throw new IllegalArgumentException("Fire intensity cannot be negative: " + intensity);
+        // }
 
         int fuelLoss = (int)(intensity * burnRate * (1 - moisture)); //how much fuel is lost after a burn
         fuel = Math.max(0, fuel - fuelLoss); //remove fuel after its gone
