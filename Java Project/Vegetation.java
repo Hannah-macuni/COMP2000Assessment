@@ -65,5 +65,7 @@ public abstract class Vegetation extends Terrain implements Burnable{
     }
 
     public abstract double calculateSpreadHeat(int fireIntensity);
-    public abstract void update();
+    public void update(){
+        age++;
+    }
 }
