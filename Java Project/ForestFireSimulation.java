@@ -155,6 +155,7 @@ public class ForestFireSimulation {
         }
     }
 
+    //TODO: maybe add an exception here
     private void spreadFires() {
         for (int row = 0; row < this.grid.getRows(); row++) {
             for (int column = 0; column < this.grid.getColumns(); column++) {
