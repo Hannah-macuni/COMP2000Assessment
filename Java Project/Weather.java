@@ -7,7 +7,7 @@ public abstract class Weather{
 
 	protected Weather(int strength, int duration, int[][] location){
 		if(strength < 0 || duration < 0){
-			throw IllegalArugumentException;
+			throw new IllegalArgumentException("Strength or Duration cannot be negative");
 		}
 		this.strength = strength;
 		this.duration = duration;
