@@ -6,6 +6,12 @@ public class Heatwave extends Weather{
 
 	@Override
 	public void affectSimulation(ForestFireSimulation simulation){
-		simulation.applyHeatwave(strength, duration, location);
+		for(int i = 0; i < location.length; i++){	
+				int row = location[i][0];
+				int columm = location[i][1];
+
+				simulation.addHeat(row, column, strength);
+			}			
+		}		
 	}
 }
