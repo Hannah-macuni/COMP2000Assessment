@@ -51,37 +51,34 @@ public class App {
         this.createMapButton = new JButton("Create New Map");
 
         this.weatherBox = new JComboBox<String>(
-            new String[] {
-                "None",
-                "Rain",
-                "Heatwave",
-                "Lightning",
-                "Wind"
-            }
-        );
+                new String[] {
+                        "None",
+                        "Rain",
+                        "Heatwave",
+                        "Lightning",
+                        "Wind"
+                });
 
         this.windDirectionBox = new JComboBox<String>(
-            new String[] {
-                "North",
-                "East",
-                "South",
-                "West"
-            }
-        );
+                new String[] {
+                        "North",
+                        "East",
+                        "South",
+                        "West"
+                });
         this.windDirectionBox.setEnabled(false);
 
         this.applyWeatherButton = new JButton("Apply Weather");
 
         this.timer = new Timer(
-            500,
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent event) {
-                    App.this.simulation.update();
-                    App.this.paintPanel.repaint();
-                }
-            }
-        );
+                500,
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent event) {
+                        App.this.simulation.update();
+                        App.this.paintPanel.repaint();
+                    }
+                });
 
         configureFrame();
 
@@ -132,65 +129,58 @@ public class App {
 
     private void configureActions() {
         this.startPauseButton.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(
-                        ActionEvent event) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(
+                            ActionEvent event) {
 
-                    toggleSimulation();
-                }
-            }
-        );
+                        toggleSimulation();
+                    }
+                });
 
         this.createMapButton.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(
-                        ActionEvent event) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(
+                            ActionEvent event) {
 
-                    createNewMap();
-                }
-            }
-        );
+                        createNewMap();
+                    }
+                });
 
         this.weatherBox.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(
-                        ActionEvent event) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(
+                            ActionEvent event) {
 
-                    String selectedWeather =
-                        (String) App.this.weatherBox
-                            .getSelectedItem();
+                        String selectedWeather = (String) App.this.weatherBox
+                                .getSelectedItem();
 
-                    App.this.windDirectionBox.setEnabled(
-                        "Wind".equals(selectedWeather)
-                    );
-                }
-            }
-        );
+                        App.this.windDirectionBox.setEnabled(
+                                "Wind".equals(selectedWeather));
+                    }
+                });
 
         this.applyWeatherButton.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(
-                        ActionEvent event) {
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(
+                            ActionEvent event) {
 
-                    applySelectedWeather();
-                }
-            }
-        );
+                        applySelectedWeather();
+                    }
+                });
 
         this.paintPanel.addMouseListener(
-            new MouseAdapter() {
-                @Override
-                public void mouseClicked(
-                        MouseEvent event) {
+                new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(
+                            MouseEvent event) {
 
-                    igniteClickedCell(event);
-                }
-            }
-        );
+                        igniteClickedCell(event);
+                    }
+                });
     }
 
     private void toggleSimulation() {
@@ -217,11 +207,10 @@ public class App {
 
             if (rows > 100 || columns > 100) {
                 throw new IllegalArgumentException(
-                    "Rows and columns cannot exceed 100."
-                );
+                        "Rows and columns cannot exceed 100.");
             }
 
-            ForestFireSimulation newSimulation =new ForestFireSimulation(rows, columns, new Random());
+            ForestFireSimulation newSimulation = new ForestFireSimulation(rows, columns, new Random());
 
             this.simulation = newSimulation;
 
@@ -232,24 +221,21 @@ public class App {
             this.frame.pack();
 
             this.statusLabel.setText(
-                "New map created: " + rows + " x " + columns
-            );
+                    "New map created: " + rows + " x " + columns);
 
         } catch (NumberFormatException exception) {
             JOptionPane.showMessageDialog(
-                this.frame,
-                "Rows and columns must be whole numbers.",
-                "Invalid input",
-                JOptionPane.ERROR_MESSAGE
-            );
+                    this.frame,
+                    "Rows and columns must be whole numbers.",
+                    "Invalid input",
+                    JOptionPane.ERROR_MESSAGE);
 
         } catch (IllegalArgumentException exception) {
             JOptionPane.showMessageDialog(
-                this.frame,
-                exception.getMessage(),
-                "Invalid map size",
-                JOptionPane.ERROR_MESSAGE
-            );
+                    this.frame,
+                    exception.getMessage(),
+                    "Invalid map size",
+                    JOptionPane.ERROR_MESSAGE);
 
         } finally {
             if (timerWasRunning) {
@@ -259,44 +245,51 @@ public class App {
     }
 
     private void applySelectedWeather() {
-        String selectedWeather =
-            (String) this.weatherBox.getSelectedItem();
+        String selectedWeather = (String) this.weatherBox.getSelectedItem();
 
         Weather weather = null;
         String weatherDescription = selectedWeather;
 
-        if ("Rain".equals(selectedWeather)) {
-            weather = new Rain(8, 20, null);
+        switch (selectedWeather) {
+            case "Rain":
+                weather = new Rain(8, 20, null);
+                break;
+            case "Heatwave":
+                weather = new Heatwave(2, 20, null);
+                break;
+            case "Lightning":
+                weather = new Lightning(10, 1, null, 3);
+                break;
+            case "Wind":
+                String selectedDirection = (String) this.windDirectionBox.getSelectedItem();
+                int direction = 0;
 
-        } else if ("Heatwave".equals(selectedWeather)) {
-            weather = new Heatwave(2, 20, null);
+                switch (selectedDirection) {
+                    case "East":
+                        direction = 1;
+                        break;
+                    case "South":
+                        direction = 2;
+                        break;
+                    case "West":
+                        direction = 3;
+                        break;
+                    default:
+                        break;
+                }
 
-        } else if ("Lightning".equals(selectedWeather)) {
-            weather = new Lightning(10, 1, null, 3);
-
-        } else if ("Wind".equals(selectedWeather)) {
-            String selectedDirection =
-                (String) this.windDirectionBox.getSelectedItem();
-
-            int direction = 0;
-
-            if ("East".equals(selectedDirection)) {
-                direction = 1;
-            } else if ("South".equals(selectedDirection)) {
-                direction = 2;
-            } else if ("West".equals(selectedDirection)) {
-                direction = 3;
-            }
-
-            weather = new Wind(8, 20, null, direction);
-            weatherDescription = "Wind " + selectedDirection;
+                weather = new Wind(8, 20, null, direction);
+                weatherDescription = "Wind " + selectedDirection;
+                break;
+            
+            default:
+                break;
         }
 
         this.simulation.setWeather(weather);
 
         this.statusLabel.setText(
-            "Weather applied: " + weatherDescription
-        );
+                "Weather applied: " + weatherDescription);
     }
 
     private void igniteClickedCell(
@@ -319,25 +312,22 @@ public class App {
 
         if (cell.isBurning()) {
             this.statusLabel.setText(
-                "This Cell is already burning."
-            );
+                    "This Cell is already burning.");
 
             return;
         }
 
         if (!cell.canBurn()) {
             this.statusLabel.setText(
-                "This Cell cannot burn."
-            );
+                    "This Cell cannot burn.");
 
             return;
         }
 
         this.simulation.igniteCell(
-            row,
-            column,
-            10
-        );
+                row,
+                column,
+                10);
 
         this.paintPanel.repaint();
 
@@ -346,14 +336,13 @@ public class App {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(
-            new Runnable() {
-                @Override
-                public void run() {
-                    App app = new App();
-                    app.showApp();
-                }
-            }
-        );
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        App app = new App();
+                        app.showApp();
+                    }
+                });
     }
 
     private void showApp() {
