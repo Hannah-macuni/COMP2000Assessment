@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Wind.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Wind.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Weather.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Weather.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Rain.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Rain.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Heatwave.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Heatwave.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Wind.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Wind.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Lightning.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lightning.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Rain.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Rain.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,13 +34,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Weather.java",
               "DocumentMoniker": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Weather.java",
               "RelativeDocumentMoniker": "Weather.java",
               "ToolTip": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Weather.java",
               "RelativeToolTip": "Weather.java",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPzZO9CQQhEIWfBwdbgAVsI1ZjG5tdaCEWYmAZBgqmZh5rMJdc4A/scu4G98FLBvlgfAxbtp0wyfv1BL6CqSzbTo/e\u002BiuNwHuPUgqMMQCAdV3hnKufDDQCIQRCCBBC1OND7l2hh3OOlFI/bqlbsNZSzpm01qSUohgjSSmH369b\u002BLMaZ7hXQERDzmgEjLEhZ1xegV05ZwD4ADIfbQvXfz00AAAAAElFTkSuQmCC",
               "WhenOpened": "2026-08-22T07:16:05.03Z",
               "EditorCaption": ""
@@ -49,23 +49,24 @@
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Heatwave.java",
               "DocumentMoniker": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Heatwave.java",
               "RelativeDocumentMoniker": "Heatwave.java",
               "ToolTip": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Heatwave.java",
               "RelativeToolTip": "Heatwave.java",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPzZO9CQQhEIWfBwdbgAVsI1ZjG5tdaCEWYmAZBgqmZh5rMJdc4A/scu4G98FLBvlgfAxbtp0wyfv1BL6CqSzbTo/e\u002BiuNwHuPUgqMMQCAdV3hnKufDDQCIQRCCBBC1OND7l2hh3OOlFI/bqlbsNZSzpm01qSUohgjSSmH369b\u002BLMaZ7hXQERDzmgEjLEhZ1xegV05ZwD4ADIfbQvXfz00AAAAAElFTkSuQmCC",
-              "WhenOpened": "2026-08-22T09:09:55.177Z"
+              "WhenOpened": "2026-08-22T09:09:55.177Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Lightning.java",
               "DocumentMoniker": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Lightning.java",
               "RelativeDocumentMoniker": "Lightning.java",
@@ -73,23 +74,25 @@
               "RelativeToolTip": "Lightning.java",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPzZO9CQQhEIWfBwdbgAVsI1ZjG5tdaCEWYmAZBgqmZh5rMJdc4A/scu4G98FLBvlgfAxbtp0wyfv1BL6CqSzbTo/e\u002BiuNwHuPUgqMMQCAdV3hnKufDDQCIQRCCBBC1OND7l2hh3OOlFI/bqlbsNZSzpm01qSUohgjSSmH369b\u002BLMaZ7hXQERDzmgEjLEhZ1xegV05ZwD4ADIfbQvXfz00AAAAAElFTkSuQmCC",
-              "WhenOpened": "2026-08-22T09:03:27.505Z"
+              "WhenOpened": "2026-08-22T09:03:27.505Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Rain.java",
               "DocumentMoniker": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Rain.java",
               "RelativeDocumentMoniker": "Rain.java",
               "ToolTip": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Rain.java",
               "RelativeToolTip": "Rain.java",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPzZO9CQQhEIWfBwdbgAVsI1ZjG5tdaCEWYmAZBgqmZh5rMJdc4A/scu4G98FLBvlgfAxbtp0wyfv1BL6CqSzbTo/e\u002BiuNwHuPUgqMMQCAdV3hnKufDDQCIQRCCBBC1OND7l2hh3OOlFI/bqlbsNZSzpm01qSUohgjSSmH369b\u002BLMaZ7hXQERDzmgEjLEhZ1xegV05ZwD4ADIfbQvXfz00AAAAAElFTkSuQmCC",
-              "WhenOpened": "2026-08-22T08:59:08.609Z"
+              "WhenOpened": "2026-08-22T08:59:08.609Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Wind.java",
               "DocumentMoniker": "C:\\Users\\C\\Documents\\GitHub\\COMP2000Assessment\\Java Project\\Wind.java",
               "RelativeDocumentMoniker": "Wind.java",

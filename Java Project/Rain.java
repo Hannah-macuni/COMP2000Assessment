@@ -11,6 +11,6 @@ public class Rain extends Weather{
 				int columm = location[i][1];
 
 		simulation.removeHeat(row, column, strength);
+	}		
 	}
-		
 }

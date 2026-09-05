@@ -1,17 +1,20 @@
 //Abstract because it's more a concept than a solid thing.
 public abstract class Weather{
 
-	public int strength;
-	public int duration;
-	public int[][] location;
+	private int strength;
+	private int duration;
+	private int[][] location;
 
-	public Weather(int strength, int duration, int[][] location){
+	protected Weather(int strength, int duration, int[][] location){
+		if(strength < 0 || duration < 0){
+			throw IllegalArugumentException;
+		}
 		this.strength = strength;
 		this.duration = duration;
 		this.location = location;
 	}
 
-	public int getstrength(){
+	public int getStrength(){
 		return strength;
 	}
 
