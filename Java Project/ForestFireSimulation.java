@@ -63,16 +63,14 @@ public class ForestFireSimulation {
     public void igniteCell(int row, int column, int intensity) {
         if (intensity <= 0) {
             throw new IllegalArgumentException(
-                "Fire intensity must be greater than zero"
-            );
+                    "Fire intensity must be greater than zero");
         }
 
         Cell cell = this.grid.getCell(row, column);
 
         if (cell == null) {
             throw new IllegalStateException(
-                "The selected Grid position has no this Cell coordinate"
-            );
+                    "The selected Grid position has no this Cell coordinate");
         }
 
         cell.ignite(intensity);
@@ -81,8 +79,7 @@ public class ForestFireSimulation {
     public void addHeat(int row, int column, double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
-                "Heat amount cannot be negative"
-            );
+                    "Heat amount cannot be negative");
         }
 
         double currentHeat = this.heatMap.getCell(row, column);
@@ -93,8 +90,7 @@ public class ForestFireSimulation {
     public void removeHeat(int row, int column, double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
-                "Heat amount cannot be negative"
-            );
+                    "Heat amount cannot be negative");
         }
 
         double currentHeat = this.heatMap.getCell(row, column);
@@ -155,7 +151,6 @@ public class ForestFireSimulation {
         }
     }
 
-    //TODO: maybe add an exception here
     private void spreadFires() {
         for (int row = 0; row < this.grid.getRows(); row++) {
             for (int column = 0; column < this.grid.getColumns(); column++) {
@@ -166,21 +161,24 @@ public class ForestFireSimulation {
                     continue;
                 }
 
-                int fireIntensity = sourceCell.getFire().getIntensity();
+                try {
+                    int fireIntensity = sourceCell.getFire().getIntensity();
 
-                double spreadHeat = fireIntensity;
-                Terrain terrain = sourceCell.getTerrain();
+                    double spreadHeat = fireIntensity;
+                    Terrain terrain = sourceCell.getTerrain();
 
-                if (terrain instanceof Vegetation) {
-                    Vegetation vegetation = (Vegetation) terrain;
+                    if (terrain instanceof Vegetation) {
+                        Vegetation vegetation = (Vegetation) terrain;
 
-                    spreadHeat =
-                        vegetation.calculateSpreadHeat(fireIntensity);
-                }
+                        spreadHeat = vegetation.calculateSpreadHeat(fireIntensity);
+                    }
 
-                for (Grid.Position neighbour : this.grid.neighbourPositions(row,column)) {
+                    for (Grid.Position neighbour : this.grid.neighbourPositions(row, column)) {
 
-                    addHeat(neighbour.getRow(), neighbour.getColumn(), spreadHeat);
+                        addHeat(neighbour.getRow(), neighbour.getColumn(), spreadHeat);
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Can't burn on cell (" + row + ", " + column + ")");
                 }
             }
         }
@@ -224,9 +222,7 @@ public class ForestFireSimulation {
 
     private void evolveTerrain() {
         for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0;
-                column < this.grid.getColumns();
-                column++) {
+            for (int column = 0; column < this.grid.getColumns(); column++) {
 
                 Cell cell = this.grid.getCell(row, column);
 
