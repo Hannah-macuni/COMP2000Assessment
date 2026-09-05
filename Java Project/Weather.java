@@ -1,6 +1,5 @@
-public class Weather{
-
-//TODO: Decide on strength scale. Suggest no larger than 0 to 5. Perhaps 0 for nothing, 1 for mild, 2 for strong? Then do a switch case to determine which number means what input...
+//Abstract because it's more a concept than a solid thing.
+public abstract class Weather{
 
 	public int strength;
 	public int duration;
@@ -9,6 +8,7 @@ public class Weather{
 	public Weather(int strength, int duration, int[][] location){
 		this.strength = strength;
 		this.duration = duration;
+		this.location = location;
 	}
 
 	public int getstrength(){
@@ -22,4 +22,7 @@ public class Weather{
 	public int[][] getLocation(){
 		return location;
 	}
+
+	//Public so subclasses can override. Abstract so subclasses have to implement their own specific behaviour.
+	public abstract void affectSimulation(ForestFireSimulation simulation);
 }

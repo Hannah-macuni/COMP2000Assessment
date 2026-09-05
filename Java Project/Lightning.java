@@ -1,13 +1,18 @@
 public class Lightning extends Weather{
 
-	public int strikesPerSecond;
+	public int strikesPerUpdate;
 
-	public Lightning(int strength, int duration, int[][] location, int strikesPerSecond){
+	public Lightning(int strength, int duration, int[][] location, int strikesPerUpdate){
 		super(strength, duration, location);
-		this.strikesPerSecond = strikesPerSecond;
+		this.strikesPerUpdate = strikesPerUpdate;
 	}
 
-	public int getStrikesPerSecond(){
-		return strikesPerSecond;
+	public int getStrikesPerUpdate(){
+		return strikesPerUpdate;
+	}
+
+	@Override
+	public void affectSimulation(ForestFireSimulation simulation){
+		simulation.applyLightning(strength, duration, location, strikesPerUpdate);
 	}
 }
