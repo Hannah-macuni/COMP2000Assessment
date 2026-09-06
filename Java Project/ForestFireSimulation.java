@@ -3,8 +3,8 @@ import java.util.Random;
 public class ForestFireSimulation {
     private Grid<Cell> grid;
     private Grid<Double> heatMap;
-    private Weather weather;
     private double ignitionThreshold;
+    private WeatherManager weatherManager = new WeatherManager(this);
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
@@ -17,7 +17,6 @@ public class ForestFireSimulation {
         this.heatMap = new Grid<Double>(rows, columns);
         this.heatMap.fill(0.0);
 
-        this.weather = null;
         this.ignitionThreshold = 100.0;
     }
 
@@ -48,12 +47,8 @@ public class ForestFireSimulation {
         return this.heatMap;
     }
 
-    public Weather getWeather() {
-        return this.weather;
-    }
-
-    public void setWeather(Weather weather) {
-        this.weather = weather;
+    public WeatherManager getWeatherManager(){
+        return this.weatherManager;
     }
 
     public double getIgnitionThreshold() {
@@ -104,8 +99,8 @@ public class ForestFireSimulation {
     }
 
     public void update() {
+        weatherManager.update();
         spreadFires();
-        applyWeather();
         applyRiverCooling();
         updateCells();
         igniteHeatedCells();
@@ -181,18 +176,6 @@ public class ForestFireSimulation {
                     System.out.println("Can't burn on cell (" + row + ", " + column + ")");
                 }
             }
-        }
-    }
-
-    private void applyWeather() {
-        if (this.weather == null) {
-            return;
-        }
-
-        this.weather.affectSimulation(this);
-
-        if (!this.weather.isActive()) {
-            this.weather = null;
         }
     }
 
