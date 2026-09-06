@@ -15,7 +15,7 @@ public class Lightning extends Weather{
 	public void affectSimulation(ForestFireSimulation simulation){
 		for(int i = 0; i < strikesPerUpdate; i++){
 			//Math.random is between 0.0 and 1.0, multipley it by the length of the location array to get a number that will be within the required range.
-			int randomIndex = Math.random() * location.length;
+			int randomIndex = (int)Math.random() * location.length;
 
 			//Get a single coordinate value within the specified range.
 			int[] coordinate = location[randomIndex];
