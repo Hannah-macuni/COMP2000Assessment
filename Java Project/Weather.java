@@ -26,6 +26,10 @@ public abstract class Weather{
 		return location;
 	}
 
+	public void decrementDuration(){
+		duration--;
+	}
+
 	//Public so subclasses can override. Abstract so subclasses have to implement their own specific behaviour.
 	public abstract void affectSimulation(ForestFireSimulation simulation);
 }
