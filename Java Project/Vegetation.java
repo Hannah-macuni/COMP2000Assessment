@@ -44,10 +44,9 @@ public abstract class Vegetation extends Terrain implements Burnable{
             return;
         }
 
-        // needs further discussion for use of exception
-        // if(intensity<0){
-        //     throw new IllegalArgumentException("Fire intensity cannot be negative: " + intensity);
-        // }
+        if(intensity<0){
+            throw new IllegalArgumentException("Fire intensity cannot be negative: " + intensity);
+        }
 
         int fuelLoss = (int)(intensity * burnRate * (1 - moisture)); //how much fuel is lost after a burn
         fuel = Math.max(0, fuel - fuelLoss); //remove fuel after its gone
