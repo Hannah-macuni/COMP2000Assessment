@@ -99,7 +99,7 @@ public class ForestFireSimulation {
     }
 
     public void update() {
-        weatherManager.update();
+        weatherManager.update(this);
         spreadFires();
         applyRiverCooling();
         updateCells();
