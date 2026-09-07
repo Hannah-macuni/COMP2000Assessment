@@ -13,7 +13,7 @@ public class Tree extends Vegetation {
     @Override
     public double calculateSpreadHeat(int fireIntensity) {
         // Calls case calculation from Vegetation and adds the height bonus
-        return super.calculateSpreadHeat(fireIntensity) + this.height;
+        return calculateSpreadHeat(fireIntensity) + this.height;
     }
 
     @Override
