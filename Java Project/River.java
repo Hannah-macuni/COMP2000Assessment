@@ -11,5 +11,10 @@ public class River extends Terrain {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'clone'");
     }
+
+    public double getCoolingStrength() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCoolingStrength'");
+    }
     
 }
