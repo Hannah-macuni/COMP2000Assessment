@@ -30,7 +30,7 @@ public class Grid<T> {
 
     public Grid(Grid<T> g) {
         // Returns a Grid of type T with dimensions copied from another Grid.
-        // NB: This method only copies the size of the Grid, not any elements in it. -JA
+        // NB: This method only copies the size of the Grid, not any elements in it.  -JA
         this.dx = g.dx;
         this.dy = g.dy;
         grid = new ArrayList<>();
