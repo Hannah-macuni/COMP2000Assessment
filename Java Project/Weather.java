@@ -22,4 +22,8 @@ public class Weather{
 	public int[][] getLocation(){
 		return location;
 	}
+
+	public void affectTerrain(Terrain t){
+		//TODO implement
+	}
 }
