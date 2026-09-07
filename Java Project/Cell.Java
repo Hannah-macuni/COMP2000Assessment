@@ -36,18 +36,6 @@ public class Cell {
         return false;
     }
 
-    // public void applyWeather(Weather w) {
-    //     if (terrain != null) {
-    //         terrain.applyWeather(w);
-    //         // TODO in Terrain - add an applyWeather class that calls the Weather to modify
-    //         // the cell?
-    //         return;
-    //     }
-    //     return;
-    // }
-    // TODO perhaps implement a copy constructor? Would need a clone() function on
-    // Terrain that's implemented by subclasses.
-
     public Terrain getTerrain() {
         return terrain;
     }
@@ -55,7 +43,8 @@ public class Cell {
     public boolean isBurning() {
         if (fire != null) {
             return true;
-        } return false;
+        }
+        return false;
     }
 
     public boolean canBurn() {
@@ -71,12 +60,13 @@ public class Cell {
     }
 
     public void ignite(int intensity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ignite'");
+        if (!hasTerrain())
+            throw new IllegalStateException("Attempted to ignite a cell with no terrain.");
+        fire = new Fire(intensity);
+        terrain.ignite();
     }
 
     public Fire getFire() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFire'");
+        return fire;
     }
 }

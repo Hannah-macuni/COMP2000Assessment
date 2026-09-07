@@ -48,6 +48,10 @@ public class Burnable implements FlammableStrategy {
         return fuel <= 0;
     }
 
+    public void ignite(){
+        burning = true;
+    }
+
     public int getFuel() {
         return fuel;
     }

@@ -9,5 +9,6 @@ public abstract class Terrain {
     public boolean isBurnedOut(){
         return flammable.isBurnedOut();
     }
+    public void ignite(){};
 }
  

@@ -10,6 +10,7 @@ public abstract interface FlammableStrategy {
         return false;
     }
     void burn(int intensity, int dampener);
+    void ignite();
     int getFuel();
     int getBurnRate();
 }
