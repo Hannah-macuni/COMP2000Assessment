@@ -1,9 +1,10 @@
-public abstract class Vegetation extends Terrain implements Burnable{
+public abstract class Vegetation extends Terrain{
     private int age;
     private int fuel;
     private int burnRate;
     private double moisture;
     private boolean burning;
+    public static FlammableStrategy flammable = new Burnable();
 
     public Vegetation(int age, int fuel, int burnRate, double moisture){
         this.age = age;
