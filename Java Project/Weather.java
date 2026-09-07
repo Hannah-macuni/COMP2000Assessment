@@ -1,9 +1,9 @@
 //Abstract because it's more a concept than a solid thing.
 public abstract class Weather{
 
-	private int strength;
-	private int duration;
-	private int[][] location;
+	protected int strength;
+	protected int duration;
+	protected int[][] location;
 
 	protected Weather(int strength, int duration, int[][] location){
 		if(strength < 0 || duration < 0){

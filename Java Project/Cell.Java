@@ -62,4 +62,19 @@ public class Cell {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'canBurn'");
     }
+
+    public void updateBurningState() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBurningState'");
+    }
+
+    public void ignite(int intensity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ignite'");
+    }
+
+    public Fire getFire() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFire'");
+    }
 }
