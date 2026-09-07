@@ -3,12 +3,7 @@ import java.util.Iterator;
 
 public class WeatherManager {
     ArrayList<Weather> weathers = new ArrayList<>();
-    private ForestFireSimulation simulation;
-
-    public WeatherManager(ForestFireSimulation simulation) {
-        this.simulation = simulation;
-    }
-
+    
     public boolean isActive(Weather w) {
         if (w.getDuration() <= 0) {
             return false;
@@ -63,7 +58,7 @@ public class WeatherManager {
         w.decrementDuration();
     }
 
-    public void update() {
+    public void update(ForestFireSimulation simulation) {
         Iterator<Weather> it = weathers.iterator();
 
         while (it.hasNext()) {
