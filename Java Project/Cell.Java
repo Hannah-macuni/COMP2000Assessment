@@ -47,4 +47,19 @@ public class Cell {
     }
     // TODO perhaps implement a copy constructor? Would need a clone() function on
     // Terrain that's implemented by subclasses.
+
+    public Terrain getTerrain() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTerrain'");
+    }
+
+    public boolean isBurning() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isBurning'");
+    }
+
+    public boolean canBurn() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'canBurn'");
+    }
 }
