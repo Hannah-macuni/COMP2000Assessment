@@ -2,9 +2,9 @@ import java.util.Random;
 
 public class ForestFireSimulation {
     private Grid<Cell> grid;
-    private Grid<Double> heatMap;
+    private Grid<Float> heatMap;
     private Weather weather;
-    private double ignitionThreshold;
+    private float ignitionThreshold;
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
@@ -14,11 +14,11 @@ public class ForestFireSimulation {
         grid = new Grid<Cell>(rows, columns);
         initializeGrid(random);
 
-        heatMap = new Grid<Double>(rows, columns);
-        heatMap.fill(0.0);
+        heatMap = new Grid<Float>(rows, columns);
+        heatMap.fill(0f));
 
         weather = null;
-        ignitionThreshold = 100.0;
+        ignitionThreshold = 100f;
     }
 
     private void initializeGrid(Random random) {
@@ -44,7 +44,7 @@ public class ForestFireSimulation {
         return grid;
     }
 
-    public Grid<Double> getHeatMap() {
+    public Grid<Float> getHeatMap() {
         return heatMap;
     }
 
@@ -56,7 +56,7 @@ public class ForestFireSimulation {
         this.weather = weather;
     }
 
-    public double getIgnitionThreshold() {
+    public float getIgnitionThreshold() {
         return ignitionThreshold;
     }
 
@@ -78,27 +78,27 @@ public class ForestFireSimulation {
         cell.ignite(intensity);
     }
 
-    public void addHeat(int row, int column, double amount) {
+    public void addHeat(int row, int column, float amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                 "Heat amount cannot be negative"
             );
         }
 
-        double currentHeat = heatMap.getCell(row, column);
+        float currentHeat = heatMap.getCell(row, column);
 
         heatMap.setCell(row, column, currentHeat + amount);
     }
 
-    public void removeHeat(int row, int column, double amount) {
+    public void removeHeat(int row, int column, float amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                 "Heat amount cannot be negative"
             );
         }
 
-        double currentHeat = heatMap.getCell(row, column);
-        double newHeat = Math.max(0.0, currentHeat - amount);
+        float currentHeat = heatMap.getCell(row, column);
+        float newHeat = Math.max(0f, currentHeat - amount);
 
         heatMap.setCell(row, column, newHeat);
     }
@@ -126,7 +126,7 @@ public class ForestFireSimulation {
                 Cell cell = grid.getCell(row, column);
 
                 if (!cell.canBurn()) {
-                    heatMap.setCell(row, column, 0.0);
+                    heatMap.setCell(row, column, 0f);
                     continue;
                 }
 
@@ -134,7 +134,7 @@ public class ForestFireSimulation {
                     continue;
                 }
 
-                int intensity = (int) Math.ceil(ignitionThreshold / 10.0);
+                int intensity = (int) Math.ceil(ignitionThreshold / 10.0f);
 
                 cell.ignite(intensity);
 
@@ -165,9 +165,9 @@ public class ForestFireSimulation {
                     continue;
                 }
 
-                int fireIntensity = sourceCell.getFire().getIntensity();
+                float fireIntensity = sourceCell.getFire().getIntensity();
 
-                double spreadHeat = fireIntensity;
+                float spreadHeat = fireIntensity;
                 Terrain terrain = sourceCell.getTerrain();
 
                 if (terrain instanceof Vegetation) {
@@ -205,13 +205,13 @@ public class ForestFireSimulation {
                 }
 
                 River river = (River) terrain;
-                double cooling = river.getCoolingStrength();
+                float cooling = river.getCoolingStrength();
 
                 removeHeat(row, column, cooling);
 
                 for (Grid.Position neighbour : grid.neighbourPositions(row, column)) {
 
-                    removeHeat(neighbour.getRow(), neighbour.getColumn(), cooling / 2.0);
+                    removeHeat(neighbour.getRow(), neighbour.getColumn(), cooling / 2.0f);
                 }
             }
         }
