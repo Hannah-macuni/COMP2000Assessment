@@ -1,17 +1,20 @@
-public class Weather{
+//Abstract because it's more a concept than a solid thing.
+public abstract class Weather{
 
-//TODO: Decide on strength scale. Suggest no larger than 0 to 5. Perhaps 0 for nothing, 1 for mild, 2 for strong? Then do a switch case to determine which number means what input...
+	protected int strength;
+	protected int duration;
+	protected int[][] location;
 
-	public int strength;
-	public int duration;
-	public int[][] location;
-
-	public Weather(int strength, int duration, int[][] location){
+	protected Weather(int strength, int duration, int[][] location){
+		if(strength < 0 || duration < 0){
+			throw new IllegalArgumentException("Strength or Duration cannot be negative");
+		}
 		this.strength = strength;
 		this.duration = duration;
+		this.location = location;
 	}
 
-	public int getstrength(){
+	public int getStrength(){
 		return strength;
 	}
 
@@ -22,4 +25,11 @@ public class Weather{
 	public int[][] getLocation(){
 		return location;
 	}
+
+	public void decrementDuration(){
+		duration--;
+	}
+
+	//Public so subclasses can override. Abstract so subclasses have to implement their own specific behaviour.
+	public abstract void affectSimulation(ForestFireSimulation simulation);
 }

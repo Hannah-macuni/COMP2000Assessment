@@ -10,4 +10,9 @@ public class Wind extends Weather{
 	public int getDirection(){
 		return direction;
 	}
+
+	@Override
+	public void affectSimulation(ForestFireSimulation simulation){
+		simulation.spreadFires(strength, location, direction);
+	}
 }

@@ -3,7 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-@SuppressWarnings({"serial", "this-escape"})
+//@SuppressWarnings({"serial", "this-escape"})
 public class PaintPanel extends JPanel {
     private ForestFireSimulation simulation;
     private int cellSize;
