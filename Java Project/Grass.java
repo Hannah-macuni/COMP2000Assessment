@@ -1,7 +1,7 @@
 public class Grass extends Vegetation {
     private int density;
 
-    public Grass(int age, int fuel, int burnRate, double moisture, int density) {
+    public Grass(int age, int fuel, int burnRate, float moisture, int density) {
         super(age, fuel, burnRate, moisture);
         this.density = density;
     }

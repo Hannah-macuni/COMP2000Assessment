@@ -123,10 +123,8 @@ public class PaintPanel extends JPanel {
 
         Terrain terrain = cell.getTerrain();
 
-        if (terrain instanceof Burnable) {
-            Burnable burnable = (Burnable) terrain;
-
-            if (burnable.isBurnedOut()) {
+        if (terrain.canBurn()) {
+            if (terrain.isBurnedOut()) {
                 return Color.DARK_GRAY;
             }
         }

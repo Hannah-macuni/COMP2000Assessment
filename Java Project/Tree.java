@@ -1,7 +1,7 @@
 public class Tree extends Vegetation {
     private int height;
 
-    public Tree(int age, int fuel, int burnRate, double moisture, int height) {
+    public Tree(int age, int fuel, int burnRate, float moisture, int height) {
         super(age, fuel, burnRate, moisture);
         this.height = height;
     }
