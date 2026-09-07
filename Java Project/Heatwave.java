@@ -1,7 +1,17 @@
 public class Heatwave extends Weather{
-	//TODO: What other things does a heatwave need or do?
 
 	public Heatwave(int strength, int duration, int location[][]){
 		super(strength, duration, location);
+	}
+
+	@Override
+	public void affectSimulation(ForestFireSimulation simulation){
+		for(int i = 0; i < location.length; i++){	
+				int row = location[i][0];
+				int columm = location[i][1];
+
+				simulation.addHeat(row, column, strength);
+			}			
+		}		
 	}
 }
