@@ -2,9 +2,9 @@ import java.util.Random;
 
 public class ForestFireSimulation {
     private Grid<Cell> grid;
-    private Grid<Float> heatMap;
-    private Weather weather;
+    private Grid<Float> heatMap;    
     private float ignitionThreshold;
+    private WeatherManager weatherManager;
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
@@ -17,7 +17,8 @@ public class ForestFireSimulation {
         heatMap = new Grid<Float>(rows, columns);
         heatMap.fill(0f));
 
-        weather = null;
+        //weather = null; Is this needed?
+
         ignitionThreshold = 100f;
     }
 
@@ -27,7 +28,7 @@ public class ForestFireSimulation {
                 int terrainNumber = random.nextInt(100);
                 Terrain terrain;
 
-                if (terrainNumber < 60) {
+                if (terrainNumber < 60) {                    
                     terrain = new Tree();
                 } else if (terrainNumber < 90) {
                     terrain = new Grass();
@@ -48,12 +49,8 @@ public class ForestFireSimulation {
         return heatMap;
     }
 
-    public Weather getWeather() {
-        return weather;
-    }
-
-    public void setWeather(Weather weather) {
-        this.weather = weather;
+    public WeatherManager getWeatherManager() {
+        return weatherManager;
     }
 
     public float getIgnitionThreshold() {
@@ -109,11 +106,42 @@ public class ForestFireSimulation {
 
     public void update() {
         spreadFires();
-        applyWeather();
+        weatherManager.update(this);
         applyRiverCooling();
         updateCells();
         igniteHeatedCells();
         evolveTerrain();
+    }
+
+    public void addWind(int direction, int strength) {
+        for(int row = 0; row < grid.getRows(); row++){
+            for (int column = 0; column < grid.getColumns(); column++){
+                Cell cell = grid.GetCell(row, column);
+                if(cell.isBurning){
+                    switch (direction) {
+                    //East
+                    case 1:    
+                    addHeat(row, column + 1, strength);
+                        break;
+                
+                    //South
+                    case 2:
+                        addHeat(row + 1, column, strength);
+                        break;
+
+                    //West
+                    case 3:
+                        addHeat(row, column - 1, strength);
+                        break;
+
+                    //North
+                    default:
+                        addHeat(row - 1, column, strength);
+                        break;
+                }
+                }               
+            }
+        }
     }
 
     private void igniteHeatedCells() {
@@ -134,7 +162,7 @@ public class ForestFireSimulation {
                     continue;
                 }
 
-                int intensity = (int) Math.ceil(ignitionThreshold / 10.0f);
+                int intensity = (int) Math.ceil(ignitionThreshold / 10f);
 
                 cell.ignite(intensity);
 
@@ -183,14 +211,6 @@ public class ForestFireSimulation {
                 }
             }
         }
-    }
-
-    private void applyWeather() {
-        if (weather == null) {
-            return;
-        }
-
-        weather.affectSimulation(this);
     }
 
     private void applyRiverCooling() {

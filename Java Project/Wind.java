@@ -13,6 +13,6 @@ public class Wind extends Weather{
 
 	@Override
 	public void affectSimulation(ForestFireSimulation simulation){
-		simulation.spreadFires(strength, location, direction);
+		simulation.addWind(strength, direction);
 	}
 }
