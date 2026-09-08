@@ -2,32 +2,33 @@ import java.util.Random;
 
 public class ForestFireSimulation {
     private Grid<Cell> grid;
-    private Grid<Double> heatMap;
-    private Weather weather;
-    private double ignitionThreshold;
+    private Grid<Float> heatMap;    
+    private float ignitionThreshold;
+    private WeatherManager weatherManager;
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
             throw new IllegalArgumentException("Random cannot be null");
         }
 
-        this.grid = new Grid<Cell>(rows, columns);
+        grid = new Grid<Cell>(rows, columns);
         initializeGrid(random);
 
-        this.heatMap = new Grid<Double>(rows, columns);
-        this.heatMap.fill(0.0);
+        heatMap = new Grid<Float>(rows, columns);
+        heatMap.fill(0f));
 
-        this.weather = null;
-        this.ignitionThreshold = 100.0;
+        //weather = null; Is this needed?
+
+        ignitionThreshold = 100f;
     }
 
     private void initializeGrid(Random random) {
-        for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0; column < this.grid.getColumns(); column++) {
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
                 int terrainNumber = random.nextInt(100);
                 Terrain terrain;
 
-                if (terrainNumber < 60) {
+                if (terrainNumber < 60) {                    
                     terrain = new Tree();
                 } else if (terrainNumber < 90) {
                     terrain = new Grass();
@@ -35,29 +36,25 @@ public class ForestFireSimulation {
                     terrain = new River();
                 }
 
-                this.grid.setCell(row, column, new Cell(terrain));
+                grid.setCell(row, column, new Cell(terrain));
             }
         }
     }
 
     public Grid<Cell> getGrid() {
-        return this.grid;
+        return grid;
     }
 
-    public Grid<Double> getHeatMap() {
-        return this.heatMap;
+    public Grid<Float> getHeatMap() {
+        return heatMap;
     }
 
-    public Weather getWeather() {
-        return this.weather;
+    public WeatherManager getWeatherManager() {
+        return weatherManager;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
-    }
-
-    public double getIgnitionThreshold() {
-        return this.ignitionThreshold;
+    public float getIgnitionThreshold() {
+        return ignitionThreshold;
     }
 
     public void igniteCell(int row, int column, int intensity) {
@@ -67,7 +64,7 @@ public class ForestFireSimulation {
             );
         }
 
-        Cell cell = this.grid.getCell(row, column);
+        Cell cell = grid.getCell(row, column);
 
         if (cell == null) {
             throw new IllegalStateException(
@@ -78,55 +75,86 @@ public class ForestFireSimulation {
         cell.ignite(intensity);
     }
 
-    public void addHeat(int row, int column, double amount) {
+    public void addHeat(int row, int column, float amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                 "Heat amount cannot be negative"
             );
         }
 
-        double currentHeat = this.heatMap.getCell(row, column);
+        float currentHeat = heatMap.getCell(row, column);
 
-        this.heatMap.setCell(row, column, currentHeat + amount);
+        heatMap.setCell(row, column, currentHeat + amount);
     }
 
-    public void removeHeat(int row, int column, double amount) {
+    public void removeHeat(int row, int column, float amount) {
         if (amount < 0) {
             throw new IllegalArgumentException(
                 "Heat amount cannot be negative"
             );
         }
 
-        double currentHeat = this.heatMap.getCell(row, column);
-        double newHeat = Math.max(0.0, currentHeat - amount);
+        float currentHeat = heatMap.getCell(row, column);
+        float newHeat = Math.max(0f, currentHeat - amount);
 
-        this.heatMap.setCell(row, column, newHeat);
+        heatMap.setCell(row, column, newHeat);
     }
 
     public boolean hasReachedIgnitionThreshold(int row, int column) {
-        return this.heatMap.getCell(row, column) >= this.ignitionThreshold;
+        return heatMap.getCell(row, column) >= ignitionThreshold;
     }
 
     public void update() {
         spreadFires();
-        applyWeather();
+        weatherManager.update(this);
         applyRiverCooling();
         updateCells();
         igniteHeatedCells();
         evolveTerrain();
     }
 
+    public void addWind(int direction, int strength) {
+        for(int row = 0; row < grid.getRows(); row++){
+            for (int column = 0; column < grid.getColumns(); column++){
+                Cell cell = grid.GetCell(row, column);
+                if(cell.isBurning){
+                    switch (direction) {
+                    //East
+                    case 1:    
+                    addHeat(row, column + 1, strength);
+                        break;
+                
+                    //South
+                    case 2:
+                        addHeat(row + 1, column, strength);
+                        break;
+
+                    //West
+                    case 3:
+                        addHeat(row, column - 1, strength);
+                        break;
+
+                    //North
+                    default:
+                        addHeat(row - 1, column, strength);
+                        break;
+                }
+                }               
+            }
+        }
+    }
+
     private void igniteHeatedCells() {
-        for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0; column < this.grid.getColumns(); column++) {
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
                 if (!hasReachedIgnitionThreshold(row, column)) {
                     continue;
                 }
 
-                Cell cell = this.grid.getCell(row, column);
+                Cell cell = grid.getCell(row, column);
 
                 if (!cell.canBurn()) {
-                    this.heatMap.setCell(row, column, 0.0);
+                    heatMap.setCell(row, column, 0f);
                     continue;
                 }
 
@@ -134,40 +162,40 @@ public class ForestFireSimulation {
                     continue;
                 }
 
-                int intensity = (int) Math.ceil(this.ignitionThreshold / 10.0);
+                int intensity = (int) Math.ceil(ignitionThreshold / 10f);
 
                 cell.ignite(intensity);
 
                 if (cell.isBurning()) {
-                    removeHeat(row, column, this.ignitionThreshold);
+                    removeHeat(row, column, ignitionThreshold);
                 }
             }
         }
     }
 
     private void updateCells() {
-        for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0; column < this.grid.getColumns(); column++) {
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
 
-                Cell cell = this.grid.getCell(row, column);
+                Cell cell = grid.getCell(row, column);
                 cell.updateBurningState();
             }
         }
     }
 
     private void spreadFires() {
-        for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0; column < this.grid.getColumns(); column++) {
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
 
-                Cell sourceCell = this.grid.getCell(row, column);
+                Cell sourceCell = grid.getCell(row, column);
 
                 if (!sourceCell.isBurning()) {
                     continue;
                 }
 
-                int fireIntensity = sourceCell.getFire().getIntensity();
+                float fireIntensity = sourceCell.getFire().getIntensity();
 
-                double spreadHeat = fireIntensity;
+                float spreadHeat = fireIntensity;
                 Terrain terrain = sourceCell.getTerrain();
 
                 if (terrain instanceof Vegetation) {
@@ -177,7 +205,7 @@ public class ForestFireSimulation {
                         vegetation.calculateSpreadHeat(fireIntensity);
                 }
 
-                for (Grid.Position neighbour : this.grid.neighbourPositions(row,column)) {
+                for (Grid.Position neighbour : grid.neighbourPositions(row,column)) {
 
                     addHeat(neighbour.getRow(), neighbour.getColumn(), spreadHeat);
                 }
@@ -185,23 +213,11 @@ public class ForestFireSimulation {
         }
     }
 
-    private void applyWeather() {
-        if (this.weather == null) {
-            return;
-        }
-
-        this.weather.affectSimulation(this);
-
-        if (!this.weather.isActive()) {
-            this.weather = null;
-        }
-    }
-
     private void applyRiverCooling() {
-        for (int row = 0; row < this.grid.getRows(); row++) {
-            for (int column = 0; column < this.grid.getColumns(); column++) {
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
 
-                Cell cell = this.grid.getCell(row, column);
+                Cell cell = grid.getCell(row, column);
                 Terrain terrain = cell.getTerrain();
 
                 if (!(terrain instanceof River)) {
@@ -209,25 +225,25 @@ public class ForestFireSimulation {
                 }
 
                 River river = (River) terrain;
-                double cooling = river.getCoolingStrength();
+                float cooling = river.getCoolingStrength();
 
                 removeHeat(row, column, cooling);
 
-                for (Grid.Position neighbour : this.grid.neighbourPositions(row, column)) {
+                for (Grid.Position neighbour : grid.neighbourPositions(row, column)) {
 
-                    removeHeat(neighbour.getRow(), neighbour.getColumn(), cooling / 2.0);
+                    removeHeat(neighbour.getRow(), neighbour.getColumn(), cooling / 2.0f);
                 }
             }
         }
     }
 
     private void evolveTerrain() {
-        for (int row = 0; row < this.grid.getRows(); row++) {
+        for (int row = 0; row < grid.getRows(); row++) {
             for (int column = 0;
-                column < this.grid.getColumns();
+                column < grid.getColumns();
                 column++) {
 
-                Cell cell = this.grid.getCell(row, column);
+                Cell cell = grid.getCell(row, column);
 
                 if (cell != null
                         && !cell.isBurning()
