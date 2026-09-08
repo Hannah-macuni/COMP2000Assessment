@@ -4,7 +4,7 @@ public class ForestFireSimulation {
     private Grid<Cell> grid;
     private Grid<Double> heatMap;
     private double ignitionThreshold;
-    private WeatherManager weatherManager = new WeatherManager(this);
+    private WeatherManager weatherManager = new WeatherManager();
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
