@@ -1,7 +1,7 @@
 public class Tree extends Vegetation {
     private int height;
 
-    public Tree(int age, int fuel, int burnRate, float moisture, int height) {
+    public Tree(int age, int fuel, int burnRate, double moisture, int height) {
         super(age, fuel, burnRate, moisture);
         this.height = height;
     }
@@ -11,7 +11,7 @@ public class Tree extends Vegetation {
     }
 
     @Override
-    public float calculateSpreadHeat(int fireIntensity) {
+    public double calculateSpreadHeat(int fireIntensity) {
         // Calls case calculation from Vegetation and adds the height bonus
         return calculateSpreadHeat(fireIntensity) + this.height;
     }

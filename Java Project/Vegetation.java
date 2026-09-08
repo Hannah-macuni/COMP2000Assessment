@@ -2,10 +2,10 @@ public abstract class Vegetation extends Terrain implements Burnable{
     private int age;
     private int fuel;
     private int burnRate;
-    private float moisture;
+    private double moisture;
     private boolean burning;
 
-    public Vegetation(int age, int fuel, int burnRate, float moisture){
+    public Vegetation(int age, int fuel, int burnRate, double moisture){
         this.age = age;
         this.fuel = fuel;
         this.burnRate = burnRate;
@@ -25,11 +25,11 @@ public abstract class Vegetation extends Terrain implements Burnable{
         return burnRate;
     }
 
-    public float getMoisture(){
+    public double getMoisture(){
         return moisture;
     }
 
-    public void setMoisture(float moisture){
+    public void setMoisture(double moisture){
         this.moisture = moisture;
     }
 
@@ -61,7 +61,7 @@ public abstract class Vegetation extends Terrain implements Burnable{
         return fuel <= 0;
     }
 
-    public abstract float calculateSpreadHeat(float fireIntensity);
+    public abstract double calculateSpreadHeat(int fireIntensity);
     public void update(){
         age++;
     }

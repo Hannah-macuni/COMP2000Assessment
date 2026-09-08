@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class WeatherManager {
-    ArrayList<Weather> weatherList = new ArrayList<>();
+    ArrayList<Weather> weathers = new ArrayList<>();
     
     public boolean isActive(Weather w) {
         if (w.getDuration() <= 0) {
@@ -29,7 +29,7 @@ public class WeatherManager {
                 break;
         }
 
-        weatherList.add(w);
+        weathers.add(w);
     }
 
     public void createWeather(String weather, String selectedDirection) {
@@ -51,7 +51,7 @@ public class WeatherManager {
         }
 
         w = new Wind(8, 20, null, direction);
-        weatherList.add(w);
+        weathers.add(w);
     }
 
     public void advanceDecrement(Weather w) {
@@ -59,7 +59,7 @@ public class WeatherManager {
     }
 
     public void update(ForestFireSimulation simulation) {
-        Iterator<Weather> it = weatherList.iterator();
+        Iterator<Weather> it = weathers.iterator();
 
         while (it.hasNext()) {
             Weather w = it.next();
