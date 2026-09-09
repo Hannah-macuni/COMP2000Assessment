@@ -1,17 +1,19 @@
-import Flammability.FlammableStrategy;
 import Flammability.NonBurnable;
 
 public class River extends Terrain {
-    FlammableStrategy inflammable = new NonBurnable();
+    private float coolingStrength;
+
+    public River(float coolingStrength) {
+        this.flammable = new NonBurnable();
+        this.coolingStrength = coolingStrength;
+    }
+
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        // Keeps the Terrain unchanged by default
     }
 
     public float getCoolingStrength() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCoolingStrength'");
+        return this.coolingStrength;
     }
-    
 }
