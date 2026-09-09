@@ -121,7 +121,7 @@ public class ForestFireSimulation {
         for(int row = 0; row < grid.getRows(); row++){
             for (int column = 0; column < grid.getColumns(); column++){
                 Cell cell = grid.getCell(row, column);
-                if(cell.isBurning){
+                if(cell.isBurning()){
                     switch (direction) {
                     //East
                     case 1:    
