@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class WeatherManager {
-    ArrayList<Weather> weatherList = new ArrayList<>();
+    private ArrayList<Weather> weatherList = new ArrayList<>();
     
     public boolean isActive(Weather w) {
         if (w.getDuration() <= 0) {
