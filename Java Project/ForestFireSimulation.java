@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class ForestFireSimulation {
     private Grid<Cell> grid;
-    private Grid<Double> heatMap;
-    private double ignitionThreshold;
+    private Grid<Float> heatMap;
+    private float ignitionThreshold;
     private WeatherManager weatherManager = new WeatherManager();
 
     public ForestFireSimulation(int rows, int columns, Random random) {
@@ -16,8 +16,6 @@ public class ForestFireSimulation {
 
         heatMap = new Grid<Float>(rows, columns);
         heatMap.fill(0f);
-
-        //weather = null; Is this needed?
 
         ignitionThreshold = 100f;
     }
@@ -122,7 +120,7 @@ public class ForestFireSimulation {
     public void addWind(int direction, int strength) {
         for(int row = 0; row < grid.getRows(); row++){
             for (int column = 0; column < grid.getColumns(); column++){
-                Cell cell = grid.GetCell(row, column);
+                Cell cell = grid.getCell(row, column);
                 if(cell.isBurning){
                     switch (direction) {
                     //East
@@ -202,7 +200,7 @@ public class ForestFireSimulation {
                 try {
                     int fireIntensity = sourceCell.getFire().getIntensity();
 
-                    double spreadHeat = fireIntensity;
+                    float spreadHeat = fireIntensity;
                     Terrain terrain = sourceCell.getTerrain();
 
                     if (terrain instanceof Vegetation) {

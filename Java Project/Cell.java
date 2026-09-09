@@ -36,15 +36,15 @@ public class Cell {
         return false;
     }
 
-    public void applyWeather(Weather w) {
-        if (terrain != null) {
-            terrain.applyWeather(w);
-            // TODO in Terrain - add an applyWeather class that calls the Weather to modify
-            // the cell?
-            return;
-        }
-        return;
-    }
+    // public void applyWeather(Weather w) {
+    //     if (terrain != null) {
+    //         terrain.applyWeather(w);
+    //         // TODO in Terrain - add an applyWeather class that calls the Weather to modify
+    //         // the cell?
+    //         return;
+    //     }
+    //     return;
+    // }
     // TODO perhaps implement a copy constructor? Would need a clone() function on
     // Terrain that's implemented by subclasses.
 
