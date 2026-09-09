@@ -1,4 +1,3 @@
-//Abstract because it's more a concept than a solid thing.
 public abstract class Weather{
 
 	protected int strength;
