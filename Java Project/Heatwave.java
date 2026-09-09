@@ -1,6 +1,6 @@
 public class Heatwave extends Weather {
 
-	public Heatwave(int strength, int duration, int location[][]) {
+	Heatwave(int strength, int duration, int location[][]) {
 		super(strength, duration, location);
 	}
 
@@ -11,7 +11,6 @@ public class Heatwave extends Weather {
 			int column = location[i][1];
 
 			simulation.addHeat(row, column, strength);
-
 		}
 	}
 }

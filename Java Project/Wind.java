@@ -1,6 +1,6 @@
 public class Wind extends Weather{
 
-	public int direction;
+	private int direction;
 
 	public Wind(int strength, int duration, int[][] location, int direction){
 		super(strength, duration, location);
