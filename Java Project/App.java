@@ -245,51 +245,17 @@ public class App {
     }
 
     private void applySelectedWeather() {
-        String selectedWeather = (String) weatherBox.getSelectedItem();
-
-        Weather weather = null;
+        String selectedWeather = (String) this.weatherBox.getSelectedItem();
+        String selectedDirection = (String) this.windDirectionBox.getSelectedItem();
         String weatherDescription = selectedWeather;
 
-        switch (selectedWeather) {
-            case "Rain":
-                weather = new Rain(8, 20, null);
-                break;
-            case "Heatwave":
-                weather = new Heatwave(2, 20, null);
-                break;
-            case "Lightning":
-                weather = new Lightning(10, 1, null, 3);
-                break;
-            case "Wind":
-                String selectedDirection = (String) windDirectionBox.getSelectedItem();
-                int direction = 0;
-
-                switch (selectedDirection) {
-                    case "East":
-                        direction = 1;
-                        break;
-                    case "South":
-                        direction = 2;
-                        break;
-                    case "West":
-                        direction = 3;
-                        break;
-                    default:
-                        break;
-                }
-
-                weather = new Wind(8, 20, null, direction);
-                weatherDescription = "Wind " + selectedDirection;
-                break;
-            
-            default:
-                break;
+        if ("Wind".equals(selectedWeather)) {
+            this.simulation.getWeatherManager().createWeather(selectedWeather, selectedDirection);
+            this.statusLabel.setText("Weather applied: Wind " + weatherDescription);
+        } else {
+            this.simulation.getWeatherManager().createWeather(selectedWeather);
+            this.statusLabel.setText("Weather applied: " + weatherDescription);
         }
-
-        simulation.setWeather(weather);
-
-        statusLabel.setText(
-                "Weather applied: " + weatherDescription);
     }
 
     private void igniteClickedCell(
