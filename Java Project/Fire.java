@@ -1,9 +1,9 @@
 public class Fire {
 
     private int intensity;
-
-    public Fire(){
-        this.intensity = 0;
+  
+    public Fire(int i){
+        intensity = i;
     }
 
     public int getIntensity() {
@@ -11,7 +11,7 @@ public class Fire {
     }
 
     public void setIntensity(int amount){
-        intensity = intensity + amount;
+        intensity += amount;
     }
     
     public Boolean isExtinguished(){
