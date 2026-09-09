@@ -45,7 +45,8 @@ public class ForestFireSimulation {
                     terrain = new Grass(age, fuel, burnRate, moisture, density);
 
                 } else {
-                    terrain = new River();
+                    float coolingStrength = 0.1f + random.nextFloat() * 0.2f;
+                    terrain = new River(coolingStrength);
                 }
 
                 grid.setCell(row, column, new Cell(terrain));
