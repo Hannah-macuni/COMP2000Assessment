@@ -2,6 +2,10 @@ public class Fire {
 
     private int intensity;
 
+    public Fire(){
+        this.intensity = 0;
+    }
+
     public int getIntensity() {
         return intensity;
     }
