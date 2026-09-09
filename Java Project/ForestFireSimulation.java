@@ -26,10 +26,24 @@ public class ForestFireSimulation {
                 int terrainNumber = random.nextInt(100);
                 Terrain terrain;
 
-                if (terrainNumber < 60) {                    
-                    terrain = new Tree();
+                if (terrainNumber < 60) {
+                    int age = random.nextInt(11);
+                    int height = 3 + random.nextInt(8);
+                    int fuel = 40 + random.nextInt(30);
+                    int burnRate = 2 + random.nextInt(4);
+                    float moisture = 0.3f + random.nextFloat() * 0.3f;
+
+                    terrain = new Tree(age, fuel, burnRate, moisture, height);
+
                 } else if (terrainNumber < 90) {
-                    terrain = new Grass();
+                    int age = random.nextInt(11);
+                    int density = 1 + random.nextInt(4);
+                    int fuel = 15 + random.nextInt(15);
+                    int burnRate = 4 + random.nextInt(3);
+                    float moisture = 0.1f + random.nextFloat() * 0.2f;
+
+                    terrain = new Grass(age, fuel, burnRate, moisture, density);
+
                 } else {
                     terrain = new River();
                 }
