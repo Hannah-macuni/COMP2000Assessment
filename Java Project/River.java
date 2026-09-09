@@ -4,7 +4,7 @@ public class River extends Terrain {
     private float coolingStrength;
 
     public River(float coolingStrength) {
-        this.flammable = new NonBurnable();
+        flammable = new NonBurnable();
         this.coolingStrength = coolingStrength;
     }
 
