@@ -22,7 +22,7 @@ public abstract class Vegetation extends Terrain{
         return flammable.getBurnRate();
     }
 
-    public double getMoisture(){
+    public float getMoisture(){
         return moisture;
     }
 
@@ -30,7 +30,7 @@ public abstract class Vegetation extends Terrain{
         this.moisture = moisture;
     }
 
-    public abstract double calculateSpreadHeat(int fireIntensity);
+    public abstract float calculateSpreadHeat(int fireIntensity);
     public void update(){
         age++;
     }

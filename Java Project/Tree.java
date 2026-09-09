@@ -11,12 +11,11 @@ public class Tree extends Vegetation {
     }
 
     @Override
-    public double calculateSpreadHeat(int fireIntensity) {
+    public float calculateSpreadHeat(int fireIntensity) {
         // Calls case calculation from Vegetation and adds the height bonus
         return calculateSpreadHeat(fireIntensity) + this.height;
     }
 
-    @Override
     public void update() {
         super.update(); // Increases age via parent update logic
         if (getAge() % 5 == 0) {

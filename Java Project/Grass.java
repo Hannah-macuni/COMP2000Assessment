@@ -15,7 +15,7 @@ public class Grass extends Vegetation {
     }
 
     @Override
-    public double calculateSpreadHeat(int fireIntensity) {
+    public float calculateSpreadHeat(int fireIntensity) {
         // Calls base calculation from Vegetation and factors in density
         return calculateSpreadHeat(fireIntensity) + this.density;
     }

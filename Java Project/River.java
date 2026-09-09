@@ -9,7 +9,7 @@ public class River extends Terrain {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
-    public double getCoolingStrength() {
+    public float getCoolingStrength() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCoolingStrength'");
     }
