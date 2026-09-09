@@ -1,11 +1,25 @@
 public class Fire {
-    int intensity;
+
+    private int intensity;
+  
     public Fire(int i){
         intensity = i;
     }
+
     public int getIntensity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getIntensity'");
+        return intensity;
     }
-    //TODO implement this class
+
+    public void setIntensity(int amount){
+        intensity += amount;
+    }
+    
+    public Boolean isExtinguished(){
+        if(intensity <= 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
