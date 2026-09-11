@@ -30,7 +30,10 @@ public abstract class Vegetation extends Terrain{
         this.moisture = moisture;
     }
 
-    public abstract float calculateSpreadHeat(int fireIntensity);
+    public float calculateSpreadHeat(int fireIntensity) {
+        return fireIntensity * (1f - moisture);
+    }
+
     public void update(){
         age++;
     }

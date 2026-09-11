@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 public class WeatherManager {
     private ArrayList<Weather> weatherList = new ArrayList<>();
-    
+
     public boolean isActive(Weather w) {
         if (w.getDuration() <= 0) {
             return false;
@@ -29,7 +29,9 @@ public class WeatherManager {
                 break;
         }
 
-        weatherList.add(w);
+        if (w != null) {
+            weatherList.add(w);
+        }
     }
 
     public void createWeather(String weather, String selectedDirection) {
@@ -51,7 +53,10 @@ public class WeatherManager {
         }
 
         w = new Wind(8, 20, null, direction);
-        weatherList.add(w);
+
+        if (w != null) {
+            weatherList.add(w);
+        }
     }
 
     public void advanceDecrement(Weather w) {
