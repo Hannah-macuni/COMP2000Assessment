@@ -27,7 +27,7 @@ public class Burnable implements FlammableStrategy {
         return burning;
     }
 
-    public void burn (int intensity, int dampener){
+    public void burn (int intensity, float dampener){
         if(!burning){
             return;
         }

@@ -1,6 +1,6 @@
 package Flammability;
 public class NonBurnable implements FlammableStrategy {
-    public void burn(int intensity, int dampener) {
+    public void burn(int intensity, float dampener) {
         throw new UnsupportedOperationException("Tried to burn a non-burnable object");
     }
 

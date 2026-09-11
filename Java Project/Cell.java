@@ -55,8 +55,13 @@ public class Cell {
     }
 
     public void updateBurningState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBurningState'");
+        if(!hasTerrain() || !hasFire()) return;
+        if(!terrain.canBurn()) return;
+        if(terrain.isBurnedOut()){
+            fire = null;
+            return;
+        }
+        terrain.burn(fire.getIntensity());
     }
 
     public void ignite(int intensity) {

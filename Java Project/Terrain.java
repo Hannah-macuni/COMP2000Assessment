@@ -10,5 +10,9 @@ public abstract class Terrain {
         return flammable.isBurnedOut();
     }
     public void ignite(){};
+
+    public void burn(int intensity){
+        throw new IllegalStateException("Attempted to burn abstract Terrain");
+    }
 }
  

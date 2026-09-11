@@ -34,4 +34,9 @@ public abstract class Vegetation extends Terrain{
     public void update(){
         age++;
     }
+
+    @Override
+    public void burn(int intensity){
+        flammable.burn(intensity, moisture);
+    }
 }

@@ -9,7 +9,7 @@ public abstract interface FlammableStrategy {
     default boolean isBurning(){
         return false;
     }
-    void burn(int intensity, int dampener);
+    void burn(int intensity, float dampener);
     void ignite();
     int getFuel();
     int getBurnRate();
