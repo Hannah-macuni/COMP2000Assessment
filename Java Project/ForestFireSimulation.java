@@ -4,7 +4,7 @@ public class ForestFireSimulation {
     private Grid<Cell> grid;
     private Grid<Float> heatMap;
     private float ignitionThreshold;
-    private WeatherManager weatherManager = new WeatherManager();
+    private WeatherManager weatherManager;
 
     public ForestFireSimulation(int rows, int columns, Random random) {
         if (random == null) {
@@ -18,6 +18,8 @@ public class ForestFireSimulation {
         heatMap.fill(0f);
 
         ignitionThreshold = 100f;
+
+        weatherManager = new WeatherManager(rows, columns, random);
     }
 
     private void initializeGrid(Random random) {
@@ -123,28 +125,36 @@ public class ForestFireSimulation {
             for (int column = 0; column < grid.getColumns(); column++){
                 Cell cell = grid.getCell(row, column);
                 if(cell.isBurning()){
+                    int targetRow = row;
+                    int targetColumn = column;
+
                     switch (direction) {
                     //East
-                    case 1:    
-                    addHeat(row, column + 1, strength);
+                    case 1:
+                        targetColumn++;
                         break;
-                
+
                     //South
                     case 2:
-                        addHeat(row + 1, column, strength);
+                        targetRow++;
                         break;
 
                     //West
                     case 3:
-                        addHeat(row, column - 1, strength);
+                        targetColumn--;
                         break;
 
                     //North
                     default:
-                        addHeat(row - 1, column, strength);
+                        targetRow--;
                         break;
+                    }
+
+                    //Fire on the edge of the map blows heat off the grid
+                    if (grid.isInBounds(targetRow, targetColumn)) {
+                        addHeat(targetRow, targetColumn, strength);
+                    }
                 }
-                }               
             }
         }
     }
