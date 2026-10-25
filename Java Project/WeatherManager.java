@@ -104,6 +104,24 @@ public class WeatherManager {
         }
     }
 
+    public String describeActiveWeather() {
+        if (weatherList.isEmpty()) {
+            return "None";
+        }
+
+        StringBuilder description = new StringBuilder();
+
+        for (Weather w : weatherList) {
+            if (description.length() > 0) {
+                description.append(", ");
+            }
+
+            description.append(w.getClass().getSimpleName());
+        }
+
+        return description.toString();
+    }
+
     public void advanceDecrement(Weather w) {
         w.decrementDuration();
     }
