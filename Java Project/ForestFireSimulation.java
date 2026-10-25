@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ForestFireSimulation {
@@ -60,7 +61,7 @@ public class ForestFireSimulation {
         return grid;
     }
 
-    public WeatherManager getWeatherManager(){
+    public WeatherManager getWeatherManager() {
         return this.weatherManager;
     }
 
@@ -82,6 +83,9 @@ public class ForestFireSimulation {
         }
 
         cell.ignite(intensity);
+
+        // A click or lightning strike changes the grid between ticks, so observers hear about it now
+        notifyListeners();
     }
 
     public void addHeat(int row, int column, float amount) {
@@ -111,6 +115,25 @@ public class ForestFireSimulation {
         return heatMap.getCell(row, column) >= ignitionThreshold;
     }
 
+    private ArrayList<SimulationListener> listeners = new ArrayList<SimulationListener>();
+
+    public void addListener(SimulationListener listener) {
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+        listeners.add(listener);
+    }
+
+    public void removeListener(SimulationListener listener) {
+        listeners.remove(listener);
+    }
+
+    private void notifyListeners() {
+        for (SimulationListener listener : listeners) {
+            listener.simulationUpdated(this);
+        }
+    }
+
     public void update() {
         weatherManager.update(this);
         spreadFires();
@@ -118,39 +141,40 @@ public class ForestFireSimulation {
         updateCells();
         igniteHeatedCells();
         evolveTerrain();
+        notifyListeners();
     }
 
     public void addWind(int direction, int strength) {
-        for(int row = 0; row < grid.getRows(); row++){
-            for (int column = 0; column < grid.getColumns(); column++){
+        for (int row = 0; row < grid.getRows(); row++) {
+            for (int column = 0; column < grid.getColumns(); column++) {
                 Cell cell = grid.getCell(row, column);
-                if(cell.isBurning()){
+                if (cell.isBurning()) {
                     int targetRow = row;
                     int targetColumn = column;
 
                     switch (direction) {
-                    //East
-                    case 1:
-                        targetColumn++;
-                        break;
+                        // East
+                        case 1:
+                            targetColumn++;
+                            break;
 
-                    //South
-                    case 2:
-                        targetRow++;
-                        break;
+                        // South
+                        case 2:
+                            targetRow++;
+                            break;
 
-                    //West
-                    case 3:
-                        targetColumn--;
-                        break;
+                        // West
+                        case 3:
+                            targetColumn--;
+                            break;
 
-                    //North
-                    default:
-                        targetRow--;
-                        break;
+                        // North
+                        default:
+                            targetRow--;
+                            break;
                     }
 
-                    //Fire on the edge of the map blows heat off the grid
+                    // Fire on the edge of the map blows heat off the grid
                     if (grid.isInBounds(targetRow, targetColumn)) {
                         addHeat(targetRow, targetColumn, strength);
                     }
