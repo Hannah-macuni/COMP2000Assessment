@@ -4,15 +4,14 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 //@SuppressWarnings({"serial", "this-escape"})
-public class PaintPanel extends JPanel {
+public class PaintPanel extends JPanel implements SimulationListener {
     private ForestFireSimulation simulation;
     private int cellSize;
 
     public PaintPanel(ForestFireSimulation simulation) {
         if (simulation == null) {
             throw new IllegalArgumentException(
-                "Simulation cannot be null"
-            );
+                    "Simulation cannot be null");
         }
 
         this.simulation = simulation;
@@ -21,23 +20,19 @@ public class PaintPanel extends JPanel {
         Grid<Cell> grid = this.simulation.getGrid();
 
         setPreferredSize(
-            new Dimension(
-                grid.getColumns() * this.cellSize,
-                grid.getRows() * this.cellSize
-            )
-        );
+                new Dimension(
+                        grid.getColumns() * this.cellSize,
+                        grid.getRows() * this.cellSize));
 
         setBackground(Color.WHITE);
         setToolTipText(
-            "Click a green cell to start a fire"
-        );
+                "Click a green cell to start a fire");
     }
 
     public void setSimulation(ForestFireSimulation simulation) {
         if (simulation == null) {
             throw new IllegalArgumentException(
-                "Simulation cannot be null"
-            );
+                    "Simulation cannot be null");
         }
 
         this.simulation = simulation;
@@ -45,17 +40,15 @@ public class PaintPanel extends JPanel {
         Grid<Cell> grid = this.simulation.getGrid();
 
         setPreferredSize(
-            new Dimension(
-                grid.getColumns() * this.cellSize,
-                grid.getRows() * this.cellSize
-            )
-        );
+                new Dimension(
+                        grid.getColumns() * this.cellSize,
+                        grid.getRows() * this.cellSize));
 
         revalidate();
         repaint();
     }
 
-    public Grid.Position getGridPositionAt(int x,int y) {
+    public Grid.Position getGridPositionAt(int x, int y) {
 
         if (x < 0 || y < 0) {
             return null;
@@ -71,6 +64,12 @@ public class PaintPanel extends JPanel {
         }
 
         return new Grid.Position(row, column);
+    }
+
+    // The panel redraws whenever the simulation it watches reports a change
+    @Override
+    public void simulationUpdated(ForestFireSimulation simulation) {
+        repaint();
     }
 
     @Override
