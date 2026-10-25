@@ -30,6 +30,7 @@ public class App {
     private JButton createMapButton;
     private JButton applyWeatherButton;
     private JLabel statusLabel;
+    private JLabel weatherLabel;
     private JComboBox<String> weatherBox;
     private JComboBox<String> windDirectionBox;
 
@@ -46,7 +47,9 @@ public class App {
 
         startPauseButton = new JButton("Pause");
 
-        statusLabel = new JLabel("Running -  Weather: None");
+        statusLabel = new JLabel("Running");
+
+        weatherLabel = new JLabel("Weather: None");
 
         createMapButton = new JButton("Create New Map");
 
@@ -75,14 +78,23 @@ public class App {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent event) {
+                        // Repainting is no longer done here
                         simulation.update();
-                        paintPanel.repaint();
                     }
                 });
+
+        attachListeners(simulation);
 
         configureFrame();
 
         configureActions();
+    }
+
+    private void attachListeners(ForestFireSimulation target) {
+        target.addListener(paintPanel);
+
+        target.addListener(updatedSimulation -> weatherLabel.setText(
+                "Weather: " + updatedSimulation.getWeatherManager().describeActiveWeather()));
     }
 
     private void configureFrame() {
@@ -121,7 +133,11 @@ public class App {
 
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        frame.add(statusLabel, BorderLayout.SOUTH);
+        JPanel statusPanel = new JPanel(new BorderLayout());
+        statusPanel.add(statusLabel, BorderLayout.WEST);
+        statusPanel.add(weatherLabel, BorderLayout.EAST);
+
+        frame.add(statusPanel, BorderLayout.SOUTH);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -214,7 +230,11 @@ public class App {
 
             simulation = newSimulation;
 
+            attachListeners(newSimulation);
+
             paintPanel.setSimulation(newSimulation);
+
+            weatherLabel.setText("Weather: None");
 
             weatherBox.setSelectedItem("None");
 
@@ -294,8 +314,6 @@ public class App {
                 row,
                 column,
                 10);
-
-        paintPanel.repaint();
 
         statusLabel.setText("Fire started at row " + row + ", column " + column);
     }
