@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class WeatherManager {
     private static final int REGION_SIZE = 15;
@@ -109,17 +110,10 @@ public class WeatherManager {
             return "None";
         }
 
-        StringBuilder description = new StringBuilder();
-
-        for (Weather w : weatherList) {
-            if (description.length() > 0) {
-                description.append(", ");
-            }
-
-            description.append(w.getClass().getSimpleName());
-        }
-
-        return description.toString();
+        // Turn each active weather into its class name, then join the names with commas
+        return weatherList.stream()
+                .map(w -> w.getClass().getSimpleName())
+                .collect(Collectors.joining(", "));
     }
 
     public void advanceDecrement(Weather w) {
