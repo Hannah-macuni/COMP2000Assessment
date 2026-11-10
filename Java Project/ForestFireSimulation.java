@@ -18,7 +18,8 @@ public class ForestFireSimulation {
         heatMap = new Grid<Float>(rows, columns);
         heatMap.fill(0f);
 
-        ignitionThreshold = 100f;
+        // Tuned so a single fire spreads on about half of maps: it either dies out or sweeps the forest
+        ignitionThreshold = 30f;
 
         weatherManager = new WeatherManager(rows, columns, random);
     }
@@ -208,8 +209,11 @@ public class ForestFireSimulation {
         });
     }
 
+    // Safe to run in parallel: each cell only burns its own fuel and clears its own fire.
+    // spreadFires and applyRiverCooling are NOT run in parallel, because they change the
+    // heat of neighbouring cells, so two threads could update the same neighbour at once.
     private void updateCells() {
-        grid.forEachCell((row, column, cell) -> cell.updateBurningState());
+        grid.forEachCellInParallel((row, column, cell) -> cell.updateBurningState());
     }
 
     private void spreadFires() {
