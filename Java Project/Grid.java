@@ -61,9 +61,18 @@ public class Grid<T> {
     }
 
     public void fill(T value) {
+        forEachCell((row, column, oldValue) -> setCell(row, column, value));
+    }
+
+    // Visits every cell, callers say what to do, Grid does the looping
+    public void forEachCell(CellAction<T> action) {
+        if (action == null) {
+            throw new IllegalArgumentException("Cell action cannot be null");
+        }
+
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
-                cells.get(row).set(column, value);
+                action.apply(row, column, cells.get(row).get(column));
             }
         }
     }
