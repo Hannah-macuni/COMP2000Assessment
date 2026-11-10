@@ -69,6 +69,9 @@ public class Cell {
             throw new IllegalStateException("Attempted to ignite a cell with no terrain.");
         if (!canBurn())
             return;
+        // A burned-out cell has no fuel left, so it cannot catch fire again
+        if (terrain.isBurnedOut())
+            return;
         fire = new Fire(intensity);
         terrain.ignite();
     }
