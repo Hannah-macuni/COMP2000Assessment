@@ -81,13 +81,7 @@ public class PaintPanel extends JPanel implements SimulationListener {
     }
 
     private void drawGrid(Graphics graphics, Grid<Cell> grid) {
-        for (int row = 0; row < grid.getRows(); row++) {
-            for (int column = 0; column < grid.getColumns(); column++) {
-                Cell cell = grid.getCell(row, column);
-
-                drawCell(graphics, cell, row, column);
-            }
-        }
+        grid.forEachCell((row, column, cell) -> drawCell(graphics, cell, row, column));
     }
 
     private void drawCell(Graphics graphics, Cell cell, int row, int column) {
