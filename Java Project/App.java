@@ -4,8 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -73,15 +71,7 @@ public class App {
 
         applyWeatherButton = new JButton("Apply Weather");
 
-        timer = new Timer(
-                500,
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent event) {
-                        // Repainting is no longer done here
-                        simulation.update();
-                    }
-                });
+        timer = new Timer(500, event -> simulation.update());
 
         attachListeners(simulation);
 
@@ -144,50 +134,15 @@ public class App {
     }
 
     private void configureActions() {
-        startPauseButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(
-                            ActionEvent event) {
+        startPauseButton.addActionListener(event -> toggleSimulation());
 
-                        toggleSimulation();
-                    }
-                });
+        createMapButton.addActionListener(event -> createNewMap());
 
-        createMapButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(
-                            ActionEvent event) {
+        weatherBox.addActionListener(event -> updateWindDirectionState());
 
-                        createNewMap();
-                    }
-                });
+        applyWeatherButton.addActionListener(event -> applySelectedWeather());
 
-        weatherBox.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(
-                            ActionEvent event) {
-
-                        String selectedWeather = (String) weatherBox
-                                .getSelectedItem();
-
-                        windDirectionBox.setEnabled(
-                                "Wind".equals(selectedWeather));
-                    }
-                });
-
-        applyWeatherButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(
-                            ActionEvent event) {
-
-                        applySelectedWeather();
-                    }
-                });
-
+        // MouseAdapter is a class with several methods, so it cannot be replaced by a lambda
         paintPanel.addMouseListener(
                 new MouseAdapter() {
                     @Override
@@ -264,6 +219,12 @@ public class App {
         }
     }
 
+    private void updateWindDirectionState() {
+        String selectedWeather = (String) weatherBox.getSelectedItem();
+
+        windDirectionBox.setEnabled("Wind".equals(selectedWeather));
+    }
+
     private void applySelectedWeather() {
         String selectedWeather = (String) this.weatherBox.getSelectedItem();
         String selectedDirection = (String) this.windDirectionBox.getSelectedItem();
@@ -319,14 +280,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        App app = new App();
-                        app.showApp();
-                    }
-                });
+        SwingUtilities.invokeLater(() -> new App().showApp());
     }
 
     private void showApp() {
