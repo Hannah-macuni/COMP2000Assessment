@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Grid<T> {
     private int rows;
@@ -64,7 +65,7 @@ public class Grid<T> {
         forEachCell((row, column, oldValue) -> setCell(row, column, value));
     }
 
-    // Visits every cell, callers say what to do, Grid does the looping
+    // The one place that visits every cell: callers say what to do, Grid does the looping
     public void forEachCell(CellAction<T> action) {
         if (action == null) {
             throw new IllegalArgumentException("Cell action cannot be null");
@@ -75,6 +76,24 @@ public class Grid<T> {
                 action.apply(row, column, cells.get(row).get(column));
             }
         }
+    }
+
+    // Cells are shared out across several threads.
+    // The action may only change the cell it is given, never a neighbour or any shared value. 
+    // The grid's lists are only read here, never resized, so reading them from several threads at once is safe.
+    public void forEachCellInParallel(CellAction<T> action) {
+        if (action == null) {
+            throw new IllegalArgumentException("Cell action cannot be null");
+        }
+
+        // Number every cell 0 .. rows*columns-1, then turn each number back into (row, column)
+        IntStream.range(0, rows * columns)
+                .parallel()
+                .forEach(index -> {
+                    int row = index / columns;
+                    int column = index % columns;
+                    action.apply(row, column, cells.get(row).get(column));
+                });
     }
 
     public boolean isInBounds(int row, int column) {
