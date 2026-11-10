@@ -38,6 +38,12 @@ public abstract class Vegetation extends Terrain{
         age++;
     }
 
+    // Pass ignition on to the Burnable strategy, otherwise it never starts using fuel
+    @Override
+    public void ignite(){
+        flammable.ignite();
+    }
+
     @Override
     public void burn(int intensity){
         flammable.burn(intensity, moisture);
